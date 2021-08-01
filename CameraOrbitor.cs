@@ -9,7 +9,7 @@ public class CameraOrbitor : MonoBehaviour {
    // public Vector3 offset;                          // Set in Inspector as (25,75,25) - not implemented, but can be used to zoom, etc.
     private Vector3 relativePosition;               // Used to hold intermediate position data as Camera transitions to new star.
     private Quaternion newRotation;                 // Used to hold intermediate rotation data as Camera "Look Rotates".
-    private Vector3 axis = new Vector3(1, 1f, 0);
+    private Vector3 axis = new Vector3(1f, 1f, 0);
     void Start() {
         orbitAxis = axis;
     }

@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/****************************************************************
+ * UICOntroller.cs - manages UI objects and thier event handlers.
+ * Attached to HUDisplay in hierarchy.
+ ***************************************************************/
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 public class UIController : MonoBehaviour {
 
@@ -8,6 +13,8 @@ public class UIController : MonoBehaviour {
     [SerializeField] private Button leftSkybox;
     [SerializeField] private Button rightSkyBox;
     [SerializeField] private GameObject[] UIMembers;
+    [SerializeField] private string[] galaxyNames;
+    [SerializeField] private TMP_Text simName;
     #pragma warning restore 0649
     private bool pause;
 
@@ -25,7 +32,7 @@ public class UIController : MonoBehaviour {
     }
 
     void OnDestroy() {
-        RemoveListeners();
+        RemoveEventListeners();
     }
 
     void Update() {
@@ -43,6 +50,10 @@ public class UIController : MonoBehaviour {
                 Time.timeScale = 1f;
             }
         }
+    }
+
+    public void SetGalaxyNameOnStart(int arg) {
+        simName.text = galaxyNames[arg];
     }
 
     private void ToggleUI() {
@@ -64,9 +75,10 @@ public class UIController : MonoBehaviour {
         else {
             arg--;
         }
-        RenderSettings.skybox = ObjectAccessor.Instance.GetSkyBox(arg); // Will also set ObjectAccessor _skyboxIndex
-        ObjectAccessor.Instance.SetBlackHoleProperties(10, Color.red);
-        SwirlColorer.Instance.SetSwirlColors();                         // _skyboxIndex has already been set!
+        RenderSettings.skybox = ObjectAccessor.Instance.GetSkyBox(arg);     // Will also set ObjectAccessor _skyboxIndex
+        ObjectAccessor.Instance.SetBlackHoleProperties();                   // Parameters handled at ObjectAccessor.
+        SwirlColorer.Instance.SetSwirlColors();                             // _skyboxIndex has already been set!
+        simName.text = galaxyNames[ObjectAccessor.Instance.SkyBoxIndex];
     }
 
     private void AddEventListeners() {
@@ -75,7 +87,7 @@ public class UIController : MonoBehaviour {
         rightSkyBox.onClick.AddListener(delegate { SwapSkyBox(true); });
     }
 
-    private void RemoveListeners() {
+    private void RemoveEventListeners() {
         toggleUI.onClick.RemoveListener(ToggleUI);
         leftSkybox.onClick.RemoveListener(delegate { SwapSkyBox(false); });
         rightSkyBox.onClick.RemoveListener(delegate { SwapSkyBox(true); });

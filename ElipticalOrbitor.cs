@@ -1,10 +1,12 @@
 ﻿/*****************************************************************************************************
  * ElipticalOrbitor.cs - manages the eliptal orbits of the various objects this script is attached to.
- * Initial object position is the right vertex of the ellipse (0, h, a). See Start().
+ * Initial object position is the semiMajor vertex of the ellipse as defined by (semiMinorAxis,
+ * inclination, semiMajorAxis). See Start().
  *****************************************************************************************************/
 using UnityEngine;
 
 public class ElipticalOrbitor : MonoBehaviour {
+
     #pragma warning disable 0649
     [SerializeField] private float semiMajorAxis;       // Ellipse long axis.
     [SerializeField] private float semiMinorAxis;       // Ellipse short axis.
@@ -12,6 +14,7 @@ public class ElipticalOrbitor : MonoBehaviour {
     [SerializeField] private float angularVelocity;     // Speed of the object as it travels on the elispse.
     [SerializeField] private Vector3 _position;         // Internal - coordinates of the elliptacal orbit each frame & Start!
     #pragma warning restore 0649
+    
     private float angle;                                // Angle of elliptic trigonometric function.
 
     void Start() {

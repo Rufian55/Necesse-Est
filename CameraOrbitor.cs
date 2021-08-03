@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*****************************************************************************************************
+ * CameraOrbitor.cs - manages the cameras oscillating orbit around Necesse Est's DeadCenter object, 
+ * a.k.a. camRotatesAroundThis. Manual controls also provided.  Changing axis vector3 values can
+ * cause Gamma Ray exposure...
+ *****************************************************************************************************/
+using UnityEngine;
 
 public class CameraOrbitor : MonoBehaviour {
 
@@ -6,10 +11,12 @@ public class CameraOrbitor : MonoBehaviour {
     private float orbitSpeed = 5f;
     private Vector3 orbitAxis;                      // Used for: primary axis of camera rotation, enable right mouse click User override.
     private float xMouseStart = 0;                  // Used to capture User's Right Mouse up/down Input.
-   // public Vector3 offset;                          // Set in Inspector as (25,75,25) - not implemented, but can be used to zoom, etc.
     private Vector3 relativePosition;               // Used to hold intermediate position data as Camera transitions to new star.
     private Quaternion newRotation;                 // Used to hold intermediate rotation data as Camera "Look Rotates".
-    private Vector3 axis = new Vector3(1f, 1f, 0);
+    
+    private Vector3 axis = new Vector3(0.8f, 1f, 0f);
+    
+    
     void Start() {
         orbitAxis = axis;
     }

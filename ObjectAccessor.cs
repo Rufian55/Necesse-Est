@@ -1,7 +1,7 @@
 ﻿/***********************************************************************************
  * ObjectAccessor.cs - manages runtime assignment of skyboxes and matching blackhole
  * fresnel power and color via parallel arrays.
- * [See SwirlColoroer class for Swirl color runtime assignment.]
+ * [See SwirlColoroer class for Swirl color runtime assignments.]
  **********************************************************************************/
 using UnityEngine;
 

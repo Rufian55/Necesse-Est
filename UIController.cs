@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
 
     public static UIController Instance = null;
+
     #pragma warning disable 0649
     [SerializeField] private Button toggleUI;
     [SerializeField] private Button leftSkybox;

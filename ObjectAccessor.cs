@@ -12,7 +12,7 @@ public class ObjectAccessor : MonoBehaviour {
     #pragma warning disable 0649
     [SerializeField] private GameObject blackHole;
     [SerializeField] private Material[] skyBoxes;        // 13 each.
-    [SerializeField] private float[] fresnelPowers;        // 13 parallel.
+    [SerializeField] private float[] fresnelPowers;      // 13 parallel.
     [SerializeField] private Color[] fresnelColors;      // 13 parallel.
     #pragma warning restore 0649
 
@@ -70,6 +70,5 @@ public class ObjectAccessor : MonoBehaviour {
             _skyBoxIndex = 0;
         }
     }
-    
 
 }

@@ -9,6 +9,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class UIController : MonoBehaviour {
 
     public static UIController Instance = null;

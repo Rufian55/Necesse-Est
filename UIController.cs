@@ -24,8 +24,8 @@ public class UIController : MonoBehaviour {
     [SerializeField] private Slider time2NextIndex;
     [SerializeField] private TMP_Text lightSeconds;
     [SerializeField] private Button toggleUI;
-    [Header("Caution! Last 3 of UIMembers[] must be as is!")]
     [SerializeField] private GameObject[] UIMembers;
+    [SerializeField] private GameObject[] autoUIMembers;    // Workaround method - see ToggleUI()
     [SerializeField] private string[] galaxyNames;
     #pragma warning restore 0649
 
@@ -33,7 +33,7 @@ public class UIController : MonoBehaviour {
     private float _time2NextGalaxy;
     private bool pause;
     private bool autoIsRunning;
-    private bool arg, showTimeControlsIsOn;         // Workaround method - see ToggleUI()
+    private bool arg, showTimeControlsIsOn;                 // Workaround method - see ToggleUI()
 
 
     void Awake() {
@@ -92,12 +92,12 @@ public class UIController : MonoBehaviour {
             }
         }
         // Activate/Deactivate Time Control UI objects.
-        for (int i = UIMembers.Length - 3; i < UIMembers.Length; i++) {
+        for (int i = 0; i < autoUIMembers.Length; i++) {
             if (!arg && showTimeControlsIsOn) {
-                UIMembers[i].SetActive(true);
+                autoUIMembers[i].SetActive(true);
             }
             else {
-                UIMembers[i].SetActive(false);
+                autoUIMembers[i].SetActive(false);
             }
         }
     }

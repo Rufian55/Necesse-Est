@@ -24,6 +24,7 @@ public class UIController : MonoBehaviour {
     [SerializeField] private Slider time2NextIndex;
     [SerializeField] private TMP_Text lightSeconds;
     [SerializeField] private Button toggleUI;
+    [Header("Caution! Last 3 of UIMembers[] must be as is!")]
     [SerializeField] private GameObject[] UIMembers;
     [SerializeField] private string[] galaxyNames;
     #pragma warning restore 0649
@@ -82,7 +83,7 @@ public class UIController : MonoBehaviour {
     // This would normally be called dynamically from Inspector. See Note in header comment.
     private void ToggleUI() {
         arg = !arg;
-        for (int i = 0; i < UIMembers.Length /*- 3*/; i++) {
+        for (int i = 0; i < UIMembers.Length; i++) {
             if (arg) {
                 UIMembers[i].SetActive(false);
             }

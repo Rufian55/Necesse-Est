@@ -1,5 +1,5 @@
 ﻿/************************************************************************************************************************
- * UICOntroller.cs - manages UI objects and their event handlers.
+ * UICOntroller.cs - manages UI objects and their event handlers. See AudioManager for additional UI controls.
  * Attached to HUDisplay in hierarchy.
  * NOTE: Due to recent regression (by Unity Technologies) to v2020.1.3, et. al., dynamic parameter passing from the
  * Inspector is no longer working, thus we resort to the bool 'arg' & 'showTimeControlsIsOn' work around method.  See:

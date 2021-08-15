@@ -1,7 +1,7 @@
 ﻿/***********************************************************************************
  * ObjectAccessor.cs - manages runtime assignment of skyboxes and matching blackhole
  * fresnel power and color via parallel arrays.
- * [See SwirlColoroer class for Swirl color runtime assignments.]
+ * [See SwirlColorer class for Swirl color runtime assignments.]
  **********************************************************************************/
 using UnityEngine;
 
@@ -60,6 +60,14 @@ public class ObjectAccessor : MonoBehaviour {
         mats.SetFloat("Vector1_46D6E030", fresnelPowers[SkyBoxIndex]);
         mats.SetColor("Color_3DE1BAF", fresnelColors[SkyBoxIndex]);
         blackHole.GetComponent<Renderer>().material = mats;
+    }
+
+    public Color GetMatchingFresnelColor() {
+        return fresnelColors[SkyBoxIndex];
+    }
+
+    public int GetSkyBoxArrayLength() {
+        return skyBoxes.Length;
     }
 
     private void CheckOOR(int index) {

@@ -12,7 +12,7 @@ public class ElipticalOrbitor : MonoBehaviour {
     [SerializeField] private float semiMinorAxis;       // Ellipse short axis.
     [SerializeField] private float inclination;         // Ellipse angle of inclination in world space. When 0, move on the x-z plane.
     [SerializeField] private float angularVelocity;     // Speed of the object as it travels on the elispse.
-    [SerializeField] private Vector3 _position;         // Internal - coordinates of the elliptacal orbit each frame & Start!
+    [SerializeField] private Vector3 _position;         // Internal - coordinates of the elliptical orbit each frame & Start!
     #pragma warning restore 0649
     
     private float angle;                                // Angle of elliptic trigonometric function.

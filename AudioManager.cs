@@ -7,16 +7,25 @@ using UnityEngine.UI;
 using TMPro;
 
 public class AudioManager : MonoBehaviour {
-    
+
+    public static AudioManager Instance = null;
+
     #pragma warning disable 0649
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private AudioSource mainTrack;
+    [SerializeField] private AudioSource buttonBip;
     [SerializeField] private Slider volume;
     [SerializeField] private TMP_Text indicatedVolume;
     #pragma warning restore 0649
     private readonly string attenuation = "volume";
 
-    private void Awake() {
+    void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        }
+        else {
+            Destroy(gameObject);
+        }
         AddListeners();
     }
 
@@ -28,6 +37,10 @@ public class AudioManager : MonoBehaviour {
 
     void OnDisable() {
         RemoveListeners();    
+    }
+
+    public void PlayBip() {
+        buttonBip.Play();
     }
 
     private void AdjustVolume(float value) {

@@ -102,7 +102,7 @@ public class UIController : MonoBehaviour {
         }
     }
 
-    private void SwapSkyBox(bool direction) {
+    private void SwapSkyBox(bool direction, bool playBip) {
         int arg = ObjectAccessor.Instance.SkyBoxIndex;
         if (direction) {
             arg++;
@@ -110,10 +110,17 @@ public class UIController : MonoBehaviour {
         else {
             arg--;
         }
+
         RenderSettings.skybox = ObjectAccessor.Instance.GetSkyBox(arg);     // Will also set ObjectAccessor _skyboxIndex
         ObjectAccessor.Instance.SetBlackHoleProperties();                   // Parameters handled at ObjectAccessor.
         SwirlColorer.Instance.SetSwirlColors();                             // _skyboxIndex has already been set!
+        GasPSOrbitor.Instance.SwapParticleOrbitor(arg);                     // Sets Orbiting Particle Swarm coloring.
+
         simName.text = galaxyNames[ObjectAccessor.Instance.SkyBoxIndex];
+        
+        if (playBip) {
+            AudioManager.Instance.PlayBip();
+        }
     }
 
     private void InitAutoIndexer(bool direction) {
@@ -122,6 +129,7 @@ public class UIController : MonoBehaviour {
             ShowTimeControls(true);
             lightSeconds.gameObject.SetActive(true);
             lightSeconds.text = _time2NextGalaxy.ToString("N0");
+            AudioManager.Instance.PlayBip();
         }
     }
 
@@ -136,7 +144,7 @@ public class UIController : MonoBehaviour {
     private IEnumerator AutoIndexer(bool direction) {
         autoIsRunning = true;
         while (true) {
-            SwapSkyBox(direction);
+            SwapSkyBox(direction, false);
             yield return new WaitForSeconds(_time2NextGalaxy);
         }
     }
@@ -163,8 +171,8 @@ public class UIController : MonoBehaviour {
 
     private void AddEventListeners() {
         toggleUI.onClick.AddListener(ToggleUI);
-        leftSkybox.onClick.AddListener(delegate { StopAutoIndexer(); SwapSkyBox(false); });
-        rightSkyBox.onClick.AddListener(delegate { StopAutoIndexer(); SwapSkyBox(true); });
+        leftSkybox.onClick.AddListener(delegate { StopAutoIndexer(); SwapSkyBox(false, true); });
+        rightSkyBox.onClick.AddListener(delegate { StopAutoIndexer(); SwapSkyBox(true, true); });
         autoLeft.onClick.AddListener(delegate { StopAutoIndexer(); InitAutoIndexer(false); });
         autoRight.onClick.AddListener(delegate { StopAutoIndexer(); InitAutoIndexer(true); });
         time2NextIndex.onValueChanged.AddListener(delegate { Time2NextIndexChange(); });
@@ -172,8 +180,8 @@ public class UIController : MonoBehaviour {
 
     private void RemoveEventListeners() {
         toggleUI.onClick.RemoveListener(ToggleUI);
-        leftSkybox.onClick.RemoveListener(delegate { StopAutoIndexer(); SwapSkyBox(false); });
-        rightSkyBox.onClick.RemoveListener(delegate { StopAutoIndexer(); SwapSkyBox(true); });
+        leftSkybox.onClick.RemoveListener(delegate { StopAutoIndexer(); SwapSkyBox(false, false); });
+        rightSkyBox.onClick.RemoveListener(delegate { StopAutoIndexer(); SwapSkyBox(true, false); });
         autoLeft.onClick.RemoveListener(delegate { StopAutoIndexer(); InitAutoIndexer(false); });
         autoRight.onClick.RemoveListener(delegate { StopAutoIndexer(); InitAutoIndexer(true); });
         time2NextIndex.onValueChanged.RemoveListener(delegate { Time2NextIndexChange(); });
